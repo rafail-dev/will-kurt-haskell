@@ -1,0 +1,19 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+	"name": "Haskell - Will Kurt",
+	"dockerComposeFile": "./docker-compose.yaml",
+	"service": "app",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/haskell:2": {}
+	}, 
+	"workspaceFolder": "/workspaces/will-kurt",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"haskell.haskell",
+				"sergey-kintsel.haskell-formatter-vscode-extension"
+			]
+		}
+	}
+}

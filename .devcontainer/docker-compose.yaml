@@ -1,0 +1,10 @@
+services:
+  app: 
+    platform: linux/amd64
+    image: mcr.microsoft.com/devcontainers/base:bookworm
+    entrypoint: sleep infinity
+    volumes:
+      - ./../:/workspaces/will-kurt
+
+
+      
