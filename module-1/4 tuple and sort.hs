@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+
 {-# HLINT ignore compareBySurname  "Use guards" #-}
 
 import Data.List
@@ -10,7 +11,6 @@ firstname = fst author
 surname = snd author
 
 names = [("F2", "L2"), ("F1", "L1"), ("F3", "L3")]
-
 
 compareBySurname name1 name2 =
   if surname1 > surname2

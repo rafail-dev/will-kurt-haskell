@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+
 {-# HLINT ignore doubleDoubleLamda "Avoid lambda using `infix`" #-}
 
 doubleDouble x = dubs * 2

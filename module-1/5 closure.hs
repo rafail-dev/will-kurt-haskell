@@ -9,4 +9,5 @@ ifEvenX x = \f -> ifEven f x
 ifEvenXInflix x f = ifEven f x
 
 result1 = ifEvenX 5 (* 2)
+
 result2 = ifEvenX 4 (* 2)

@@ -11,7 +11,9 @@ flipBinaryArgs f = \x y -> f y x
 flipBinaryArgs2 = flip
 
 result1 = flipBinaryArgs f "a" "b"
+
 -- "ba"
 
 result2 = flipBinaryArgs2 f "a" "b"
+
 -- "ba"

@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+
 {-# HLINT ignore sumSquareOrSquareSum "Use max" #-}
 
 sumSquareOrSquareSum x y =
