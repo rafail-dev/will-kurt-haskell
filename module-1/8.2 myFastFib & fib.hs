@@ -10,13 +10,17 @@ fastFib = calculate 1 1
     calculate x y 3 = x + y
     calculate x y c = calculate (x + y) x (c - 1)
 
--- fastFib 10
--- calculate 1  1   10
---           2  1   9
---           3  2   8
---           5  3   7 
---           8  5   6
---           13 8   5
---           21 13  4
---           34 21  3
---           55   
+{-
+
+fastFib 10
+calculate 1  1   10
+          2  1   9
+          3  2   8
+          5  3   7
+          8  5   6
+          13 8   5
+          21 13  4
+          34 21  3
+          55
+
+-}
