@@ -1,1 +1,1 @@
-harmonic = map (1 /) [2 ..]
+harmonic = map (1 /) [1 ..]
