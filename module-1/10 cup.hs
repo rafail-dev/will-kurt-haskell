@@ -1,15 +1,10 @@
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-
-{-# HLINT ignore cupConstructor "Redundant lambda" #-}
-
-cupConstructor ml = \message -> message ml
+-- cupConstructor ml = \message -> message ml
+cupConstructor ml message = message ml
 
 --
 
-getMl cup = cup id
-
--- same
 -- getMl cup = cup (\ml -> ml)
+getMl cup = cup id
 
 isEmpty cup = getMl cup == 0
 
