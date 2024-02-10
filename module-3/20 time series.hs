@@ -158,18 +158,65 @@ compareTS compareFunction (TS times values)
 
 -- ==
 
+diffPair :: (Num a) => Maybe a -> Maybe a -> Maybe a
+diffPair Nothing _ = Nothing
+diffPair _ Nothing = Nothing
+diffPair (Just v1) (Just v2) = Just $ v1 - v2
+
+diffTS :: (Num a) => TS a -> TS a
+diffTS (TS [] []) = TS [] []
+diffTS (TS times values) = TS times $ Nothing : diffs
+  where
+    diffs = zipWith diffPair (tail values) values
+
+-- ==
+
+meanMaybe :: (Real a) => [Maybe a] -> Maybe Double
+meanMaybe values
+  | Nothing `elem` values = Nothing
+  | otherwise = Just $ mean $ map fromJust values
+
+movingAvg :: (Real a) => [Maybe a] -> Int -> [Maybe Double]
+movingAvg [] _ = []
+movingAvg values n
+  | length nextValues == n = meanMaybe nextValues : movingAvg restValues n
+  | otherwise = []
+  where
+    nextValues = take n values
+    restValues = tail values
+
+movingAvgTS :: (Real a) => TS a -> Int -> TS Double
+movingAvgTS (TS [] []) _ = TS [] []
+movingAvgTS (TS times values) n = TS times smoothedValues
+  where
+    nothings = replicate (n `div` 2) Nothing
+    smoothedValues = mconcat [nothings, movingAvg values n, nothings]
+
+-- ==
+
 main :: IO ()
 main = do
   let tsAll = mconcat $ map fileToTS [file1, file2, file3, file4]
   print "All"
   print tsAll
   putStrLn ""
+
   print "Mean"
   print $ meanTS tsAll
   putStrLn ""
+
   print "Min"
   print $ compareTS min tsAll
   putStrLn ""
+
   print "Max"
   print $ compareTS max tsAll
+  putStrLn ""
+
+  putStrLn "Mean Delta"
+  print $ meanTS $ diffTS tsAll
+  putStrLn ""
+
+  putStrLn "3-point moving Avg"
+  print $ movingAvgTS tsAll 3
   putStrLn ""
