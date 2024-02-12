@@ -1,4 +1,4 @@
-module Modules20.Extrema where
+module Modules20.Extremum (extremumTS) where
 
 import Modules20.TS (Data, TS (TS), TimeIndex)
 
@@ -14,16 +14,10 @@ comparePair compareFunction (i1, Just value1) (i2, Just value2)
   | compareFunction value1 value2 == value1 = (i1, Just value1)
   | otherwise = (i2, Just value2)
 
-compareTS :: (Eq a) => CompareFunction a -> TS a -> Maybe (TimeIndex, Maybe a)
-compareTS _ (TS [] []) = Nothing
-compareTS compareFunction (TS times values)
+extremumTS :: (Eq a) => CompareFunction a -> TS a -> Maybe (TimeIndex, Maybe a)
+extremumTS _ (TS [] []) = Nothing
+extremumTS compareFunction (TS times values)
   | all (== Nothing) values = Nothing
   | otherwise = Just best
   where
     best = foldr (comparePair compareFunction) (0, Nothing) $ zip times values
-
-minTS :: (Ord a) => TS a -> Maybe (TimeIndex, Maybe a)
-minTS = compareTS min
-
-maxTS :: (Ord a) => TS a -> Maybe (TimeIndex, Maybe a)
-maxTS = compareTS max
