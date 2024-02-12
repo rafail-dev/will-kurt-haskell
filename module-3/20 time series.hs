@@ -8,6 +8,7 @@ import Modules20.Extremum (extremumTS)
 import Modules20.Moving (movingTS)
 import Modules20.TS (Data, TS (TS), TimeIndex)
 import Modules20.Transformation (diffPair, ratioPair, transformTS)
+import Modules20.StandartDeviation (standartDeviation)
 
 fileToTS :: [(TimeIndex, a)] -> TS a
 fileToTS pairs = createTS times values
@@ -70,4 +71,8 @@ main = do
 
   putStrLn "3-point Moving Median"
   print $ movingTS median 3 tsAll
+  putStrLn ""
+
+  putStrLn "Standart Deviation"
+  print $ standartDeviation tsAll
   putStrLn ""
