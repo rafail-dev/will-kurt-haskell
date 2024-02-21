@@ -6,9 +6,10 @@ import Modules20.CentralTendency (centralTendencyTS, mean, median)
 import Modules20.Data (file1, file2, file3, file4)
 import Modules20.Extremum (extremumTS)
 import Modules20.Moving (movingTS)
+import Modules20.Operation (operateTS)
+import Modules20.StandartDeviation (standartDeviationTS)
 import Modules20.TS (Data, TS (TS), TimeIndex)
 import Modules20.Transformation (diffPair, ratioPair, transformTS)
-import Modules20.StandartDeviation (standartDeviationTS)
 
 fileToTS :: [(TimeIndex, a)] -> TS a
 fileToTS pairs = createTS times values
@@ -75,4 +76,19 @@ main = do
 
   putStrLn "Standart Deviation"
   print $ standartDeviationTS tsAll
+  putStrLn ""
+
+  let ts1' = TS [1, 2, 3, 4] [Just 1, Nothing, Just 3, Just 4]
+  let ts2' = TS [1, 2, 4, 33] [Just 1, Just 2, Just 4, Just 3]
+
+  putStrLn "TS summation"
+  print $ operateTS (+) ts1' ts2'
+  putStrLn ""
+
+  putStrLn "TS subtraction"
+  print $ operateTS (-) ts1' ts2'
+  putStrLn ""
+
+  putStrLn "TS multiplication"
+  print $ operateTS (*) ts1' ts2'
   putStrLn ""
