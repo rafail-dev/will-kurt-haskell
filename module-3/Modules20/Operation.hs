@@ -23,12 +23,3 @@ operateTS f (TS t1 v1) (TS t2 v2) = TS t1 newValues
     ts1Tuples = zip t1 v1
     ts2Map = Map.fromList $ filterJust $ zip t2 v2
     newValues = map (\(t, v) -> operate f v (Map.lookup t ts2Map)) ts1Tuples
-
-summationTS :: (Real a) => TS a -> TS a -> TS a
-summationTS = operateTS (+)
-
-subtractionTS :: (Real a) => TS a -> TS a -> TS a
-subtractionTS = operateTS (-)
-
-multiplicationTS :: (Real a) => TS a -> TS a -> TS a
-multiplicationTS = operateTS (*)
