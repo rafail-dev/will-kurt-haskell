@@ -11,19 +11,18 @@ import Modules20.Transformation (diffPair, transformTS)
 --   where
 --     f = (^ 2) . (realToFrac mean -) . realToFrac
 
-diffsSquare' :: (Real a, Real b) => [a] -> b -> Maybe [Double]
-diffsSquare' values mean = Just $ map f values
+differencesOfSquares :: (Real a, Real b) => [a] -> b -> Maybe [Double]
+differencesOfSquares values mean = Just $ map f values
   where
     f = (^ 2) . (realToFrac mean -) . realToFrac
 
 standartDeviation :: (Real a) => TS a -> Maybe Double
 standartDeviation (TS [] []) = Nothing
--- fmap insted of sqrtMaybe
-standartDeviation (TS _ values) = sqrt <$> maybeDiffsSquareMean
+-- fmap / <$> insted of custom sqrtMaybe
+standartDeviation (TS _ values) = sqrt <$> maybeVariance
   where
     clearValues = catMaybes values
     maybeMean = mean clearValues
-    -- maybeDiffsSquare = diffsSquare clearValues maybeMean
     -- >>= - bind
-    maybeDiffsSquare = maybeMean >>= diffsSquare' clearValues
-    maybeDiffsSquareMean = maybeDiffsSquare >>= mean
+    maybeDifferencesOfSquares = maybeMean >>= differencesOfSquares clearValues
+    maybeVariance = maybeDifferencesOfSquares >>= mean
