@@ -1,28 +1,28 @@
 module Modules20.StandartDeviation where
 
 import Data.Maybe (catMaybes)
-import Modules20.CentralTendency (centralTendencyTS, mean)
+import Modules20.CentralTendency (mean)
 import Modules20.TS (TS (TS))
-import Modules20.Transformation (diffPair, transformTS)
-
--- diffsSquare :: (Real a, Real b) => [a] -> Maybe b -> Maybe [Double]
--- diffsSquare _ Nothing = Nothing
--- diffsSquare values (Just mean) = Just $ map f values
---   where
---     f = (^ 2) . (realToFrac mean -) . realToFrac
 
 differencesOfSquares :: (Real a, Real b) => [a] -> b -> Maybe [Double]
 differencesOfSquares values mean = Just $ map f values
   where
     f = (^ 2) . (realToFrac mean -) . realToFrac
 
-standartDeviation :: (Real a) => TS a -> Maybe Double
-standartDeviation (TS [] []) = Nothing
--- fmap / <$> insted of custom sqrtMaybe
-standartDeviation (TS _ values) = sqrt <$> maybeVariance
+variance :: (Real a) => [a] -> Maybe Double
+variance [] = Nothing
+variance values = maybeDifferencesOfSquares >>= mean
   where
-    clearValues = catMaybes values
-    maybeMean = mean clearValues
+    maybeMean = mean values
     -- >>= - bind
-    maybeDifferencesOfSquares = maybeMean >>= differencesOfSquares clearValues
-    maybeVariance = maybeDifferencesOfSquares >>= mean
+    maybeDifferencesOfSquares = maybeMean >>= differencesOfSquares values
+
+-- standard deviation for the population
+-- standartDeviation [2, 4, 4, 4, 5, 5, 7, 9] (Wiki)
+standartDeviation :: (Real a) => [a] -> Maybe Double
+standartDeviation [] = Nothing
+-- fmap / <$> insted of custom sqrtMaybe
+standartDeviation values = sqrt <$> variance values
+
+standartDeviationTS :: (Real a) => TS a -> Maybe Double
+standartDeviationTS (TS _ values) = standartDeviation $ catMaybes values
