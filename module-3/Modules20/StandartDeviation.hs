@@ -10,7 +10,6 @@ differencesOfSquares values mean = Just $ map f values
     f = (^ 2) . (realToFrac mean -) . realToFrac
 
 variance :: (Real a) => [a] -> Maybe Double
-variance [] = Nothing
 variance values = maybeDifferencesOfSquares >>= mean
   where
     maybeMean = mean values
@@ -20,7 +19,6 @@ variance values = maybeDifferencesOfSquares >>= mean
 -- standard deviation for the population
 -- standartDeviation [2, 4, 4, 4, 5, 5, 7, 9] (Wiki)
 standartDeviation :: (Real a) => [a] -> Maybe Double
-standartDeviation [] = Nothing
 -- fmap / <$> insted of custom sqrtMaybe
 standartDeviation values = sqrt <$> variance values
 
