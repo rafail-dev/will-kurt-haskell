@@ -1,4 +1,3 @@
-import Data.Array
 import Data.List (sort)
 import Data.Map qualified as Map
 import Data.Maybe (catMaybes, fromJust, isJust)
