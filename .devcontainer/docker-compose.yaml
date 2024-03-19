@@ -1,10 +1,7 @@
 services:
   app: 
     platform: linux/amd64
-    image: mcr.microsoft.com/devcontainers/base:bookworm
+    image: mcr.microsoft.com/devcontainers/base:jammy
     entrypoint: sleep infinity
     volumes:
       - ./../:/workspaces/will-kurt
-
-
-      
