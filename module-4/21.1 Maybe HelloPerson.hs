@@ -1,3 +1,6 @@
+{--
+cabal install containers --lib
+--}
 module Homework211 where
 
 import Data.Map qualified as Map (Map, fromList, lookup)
