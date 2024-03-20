@@ -6,7 +6,7 @@ cabal install text --lib
 
 import Data.Semigroup ((<>))
 import Data.Text qualified as T
-import Data.Text.IO qualified as T
+import Data.Text.IO qualified as TIO
 
 combinedTextMonoid :: T.Text
 combinedTextMonoid = mconcat ["some", " ", "text"]
@@ -25,4 +25,4 @@ highlighted all forHighlight = T.intercalate ("{{ " <> forHighlight <> " }}") $ 
 
 main :: IO ()
 main = do
-  T.putStrLn $ highlighted aboutHaskell "Haskell"
+  TIO.putStrLn $ highlighted aboutHaskell "Haskell"
