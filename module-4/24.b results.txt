@@ -1,0 +1,24 @@
+SymbolCount	 16 
+WordCount	 3 
+LineCount	 2 
+
+SymbolCount	 16 
+WordCount	 3 
+LineCount	 2 
+
+SymbolCount	 16 
+WordCount	 3 
+LineCount	 2 
+
+SymbolCount	 16 
+WordCount	 3 
+LineCount	 2 
+
+SymbolCount	 16 
+WordCount	 3 
+LineCount	 2 
+
+SymbolCount	 16 
+WordCount	 3 
+LineCount	 2 
+
