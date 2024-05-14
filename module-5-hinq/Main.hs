@@ -3,7 +3,7 @@ module Main where
 import Control.Applicative (Alternative)
 import Control.Arrow ((***))
 import Control.Monad (guard)
-import Data.List (uncons)
+
 import Entities
 import HINQ
 import Mock
