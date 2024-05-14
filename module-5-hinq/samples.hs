@@ -1,6 +1,8 @@
 module Samples where
 
+import Data.List (uncons)
 import Entities
+import HINQ
 import Main
 import Mock
 
@@ -30,3 +32,23 @@ _whereSample2 = _where ((Freshman ==) . gradeLevel) $ _select id students
 
 _joinSample1 :: [(Teacher, Course)]
 _joinSample1 = _join teachers courses teacherId teacher
+
+query1 :: HINQ [] (Teacher, Course) Name
+query1 =
+  HINQ
+    (_select $ teacherName . fst)
+    (_join teachers courses teacherId teacher)
+    (_where ((== "English Language") . courseTitle . snd))
+
+query2 :: HINQ [] Teacher Name
+query2 = HINQ_ (_select teacherName) teachers
+
+queryMaybe :: HINQ Maybe (Teacher, Course) Name
+queryMaybe =
+  HINQ
+    (_select $ teacherName . fst)
+    (_join possibleTeacher posssibleCourse teacherId teacher)
+    (_where ((== "French Language") . courseTitle . snd))
+  where
+    possibleTeacher = (uncons teachers) >>= pure . fst
+    posssibleCourse = (uncons courses) >>= pure . fst

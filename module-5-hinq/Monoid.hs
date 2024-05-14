@@ -8,12 +8,15 @@ import Mock
 
 instance Semigroup (HINQ m a b) where
   (<>) :: HINQ m a b -> HINQ m a b -> HINQ m a b
+  (<>) hinq1 HINQ_EMPTY = hinq1
+  (<>) HINQ_EMPTY hinq2 = hinq2
+  --
   (<>) (HINQ s1 j1 w1) (HINQ _ _ w2) = HINQ (s1) j1 (w1 . w2)
   (<>) hinq1 (HINQ_ _ _) = hinq1
   (<>) (HINQ_ _ _) hinq2 = hinq2
 
 instance Monoid (HINQ m a b) where
-  mappend = (<>)
+  -- mappend = (<>)
   mempty = HINQ_EMPTY
 
 --

@@ -8,15 +8,6 @@ import Entities
 import HINQ
 import Mock
 
-{-
-(m a -> m b) - select
-(m a) - join
-(m a -> m a) - where
--}
--- data HINQ m a b
---   = HINQ (m a -> m b) (m a) (m a -> m a)
---   | HINQ_ (m a -> m b) (m a)
-
 _select :: (Monad m) => (a -> b) -> m a -> m b
 _select prop values = values >>= pure . prop
 
@@ -65,31 +56,11 @@ hinqResult =
 
 --
 
-makeHINQ :: (Monad m, Alternative m) => HINQ m a b -> m b
-makeHINQ (HINQ selectClause joinClause whereClause) =
+runHINQ :: (Monad m, Alternative m) => HINQ m a b -> m b
+runHINQ (HINQ selectClause joinClause whereClause) =
   _hinq selectClause joinClause whereClause
-makeHINQ (HINQ_ selectClause joinClause) =
+runHINQ (HINQ_ selectClause joinClause) =
   _hinq selectClause joinClause (_where $ const True)
-
-query1 :: HINQ [] (Teacher, Course) Name
-query1 =
-  HINQ
-    (_select $ teacherName . fst)
-    (_join teachers courses teacherId teacher)
-    (_where ((== "English Language") . courseTitle . snd))
-
-query2 :: HINQ [] Teacher Name
-query2 = HINQ_ (_select teacherName) teachers
-
-queryMaybe :: HINQ Maybe (Teacher, Course) Name
-queryMaybe =
-  HINQ
-    (_select $ teacherName . fst)
-    (_join possibleTeacher posssibleCourse teacherId teacher)
-    (_where ((== "French Language") . courseTitle . snd))
-  where
-    possibleTeacher = (uncons teachers) >>= pure . fst
-    posssibleCourse = (uncons courses) >>= pure . fst
 
 --
 
@@ -103,14 +74,11 @@ englishStudentQuery :: HINQ [] ((Name, Int), Course) Name
 englishStudentQuery =
   HINQ
     (_select (fst . fst))
-    (_join (makeHINQ studentEnrollementsQuery) courses snd courseId)
+    (_join (runHINQ studentEnrollementsQuery) courses snd courseId)
     (_where ((== "English Language") . courseTitle . snd))
-
-sub = makeHINQ studentEnrollementsQuery
 
 --
 
-
 main :: IO ()
 main =
-  print $ "a"
+  print $ runHINQ englishStudentQuery
