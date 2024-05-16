@@ -12,7 +12,9 @@
 		"vscode": {
 			"extensions": [
 				"haskell.haskell",
-				"sergey-kintsel.haskell-formatter-vscode-extension"
+				"sergey-kintsel.haskell-formatter-vscode-extension",
+				"berberman.vscode-cabal-fmt",
+				"redhat.vscode-yaml"
 			]
 		}
 	}
