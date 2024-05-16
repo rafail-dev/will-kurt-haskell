@@ -1,0 +1,21 @@
+cradle:
+  multi:
+    # Direct cradle for Setup.hs
+    - path: "./Setup.hs"
+      config:
+        cradle:
+          direct:
+            arguments: []
+    # Stack cradle for the main project
+    - path: "./"
+      config:
+        cradle:
+          cabal:
+            - path: "src"
+              component: "lib:palindrome"
+
+            - path: "app/Main.hs"
+              component: "palindrome:exe:palindrome-exe"
+
+            - path: "test"
+              component: "palindrome:test:palindrome-test"
