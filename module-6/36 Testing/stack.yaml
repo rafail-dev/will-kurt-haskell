@@ -17,8 +17,7 @@
 #
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2023-01-01.yaml
-resolver:
-  compiler: ghc-9.8.2
+resolver: nightly-2024-05-16
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -41,6 +40,10 @@ packages:
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
 # extra-deps: []
+# extra-deps:
+# - QuickCheck-2.15
+# - random-1.2.1.2
+# - splitmix-0.1.0.5
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
