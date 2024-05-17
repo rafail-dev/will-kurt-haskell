@@ -9,12 +9,13 @@ cradle:
     # Stack cradle for the main projectcradle:
     - path: "."
       config:
-        stack:
-          - path: "./src"
-            component: "testing:lib"
+        cradle:
+          stack:
+            - path: "./src"
+              component: "testing:lib"
 
-          - path: "./app/Main.hs"
-            component: "testing:exe:testing-exe"
+            - path: "./app/Main.hs"
+              component: "testing:exe:testing-exe"
 
-          - path: "./test"
-            component: "testing:test:testing-test"
+            - path: "./test"
+              component: "testing:test:testing-test"
