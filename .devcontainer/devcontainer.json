@@ -14,7 +14,8 @@
 				"haskell.haskell",
 				"sergey-kintsel.haskell-formatter-vscode-extension",
 				"berberman.vscode-cabal-fmt",
-				"redhat.vscode-yaml"
+				"redhat.vscode-yaml",
+				"EditorConfig.EditorConfig"
 			]
 		}
 	}
