@@ -1,7 +1,8 @@
 module Main (main) where
 
-import Prime (isPrime)
+import Homework381 (addStrInts)
 import Nested (f)
+import Prime (isPrime)
 import Text.Read (readEither)
 
 main :: IO ()
@@ -19,3 +20,12 @@ main = do
   putStrLn "Nested errors"
   let v2 = Nested.f True
   print v2
+
+  putStrLn ""
+  --
+
+  putStrLn "Homework 38.1"
+  putStrLn "Please enter a number"
+  v31 <- getLine
+  v32 <- getLine
+  print $ addStrInts v31 v32
