@@ -1,6 +1,7 @@
 module Main (main) where
 
-import Lib
+import Control.Monad (guard)
+
 
 main :: IO ()
-main = someFunc
+main = pure ()
