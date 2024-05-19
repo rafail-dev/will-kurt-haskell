@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Factors
+      MillerRabin
       Primes
   other-modules:
       Paths_primes
