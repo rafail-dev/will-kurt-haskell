@@ -1,0 +1,21 @@
+cradle:
+  multi:
+    # Direct cradle for Setup.hs
+    - path: "./Setup.hs"
+      config:
+        cradle:
+          direct:
+            arguments: []
+    # Stack cradle for the main projectcradle:
+    - path: "."
+      config:
+        cradle:
+          stack:
+            - path: "./src"
+              component: "Either:lib"
+
+            - path: "./app/Main.hs"
+              component: "Either:exe:Either-exe"
+
+            - path: "./test"
+              component: "Either:test:Either-test"
