@@ -1,0 +1,21 @@
+cradle:
+  multi:
+    # Direct cradle for Setup.hs
+    - path: "./Setup.hs"
+      config:
+        cradle:
+          direct:
+            arguments: []
+    # Stack cradle for the main projectcradle:
+    - path: "."
+      config:
+        cradle:
+          stack:
+            - path: "./src"
+              component: "http-request:lib"
+
+            - path: "./app/Main.hs"
+              component: "http-request:exe:http-request-exe"
+
+            - path: "./test"
+              component: "http-request:test:http-request-test"
