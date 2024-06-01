@@ -2,6 +2,7 @@
 
 module Lib
   ( buildRequest,
+    buildRequestNOSSL,
     Method (GET, POST),
   )
 where
@@ -34,13 +35,21 @@ instance ToByteString Method where
   toByteString GET = "GET"
   toByteString POST = "POST"
 
-buildRequest :: Method -> Host -> Path -> Token -> Request
-buildRequest method host path token =
+buildRequestBase :: Method -> Host -> Path -> Token -> Request
+buildRequestBase method host path token =
   setRequestHeader "token" [token] $
     setRequestPath path $
       setRequestHost host $
-        setRequestMethod (toByteString method) $
-          setRequestPort 443 $
-            setRequestSecure
-              True
-              defaultRequest
+        setRequestMethod (toByteString method) defaultRequest
+
+buildRequest :: Method -> Host -> Path -> Token -> Request
+buildRequest method host path token =
+  setRequestPort 443 $
+    setRequestSecure True $
+      buildRequestBase method host path token
+
+buildRequestNOSSL :: Method -> Host -> Path -> Token -> Request
+buildRequestNOSSL method host path token =
+  setRequestPort 80 $
+    setRequestSecure False $
+      buildRequestBase method host path token
