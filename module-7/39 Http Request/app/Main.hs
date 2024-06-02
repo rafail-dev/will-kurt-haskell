@@ -7,7 +7,7 @@ import Network.HTTP.Types.Status (statusMessage)
 
 main :: IO ()
 main = do
-  response <- httpLBS (buildRequest GET "www.ncdc.noaa.gov" "/cdo-web/api/v2/datasets" "<TOKEN from https://github.com/NOAAGov>")
+  response <- httpLBS (buildRequest GET "www.ncdc.noaa.gov" "/cdo-web/api/v2/datasets" "tSCGKlBqkTUHKssbTNULSXKUBbwgJyyz")
   let statusCode = getResponseStatusCode response
   let jsonBody = getResponseBody response
   if statusCode == 200
