@@ -1,6 +1,7 @@
 module Main (main) where
 
 import Control.Monad (forM_, (<=<))
+import qualified Rental.Actions as Rental
 import Text.Read (readMaybe)
 import qualified Tool.Actions as Tool
 import qualified User.Actions as User
@@ -63,6 +64,39 @@ performCommand' command = do
     {-
       Help
     -}
+    ["rent", userId, rentId] ->
+      case (readMaybe userId, readMaybe rentId) of
+        (Just userId', Just rentId') -> do
+          let a = userId' + rentId' :: Int
+          pure $ show a
+        _ -> pure "Wrong user id ot tool id"
+    --
+    ["return", rentId] ->
+      case readMaybe rentId of
+        (Just rendtId') ->
+          handleResult
+            (Rental.return' rendtId')
+            (\_ -> pure $ "Returned rental: " ++ rentId)
+        Nothing -> pure "Wrong rent id"
+    --
+    -- ["rentals"] ->
+    --   handleResult
+    --     (Rental.find False)
+    --     (pure . concatMap (\v -> show v ++ "\n"))
+    --
+
+    ["all_rentals"] ->
+      handleResult
+        (Rental.find False)
+        (pure . concatMap (\v -> show v ++ "\n"))
+    --
+    ["actual_rentals"] ->
+      handleResult
+        (Rental.find True)
+        (pure . concatMap (\v -> show v ++ "\n"))
+    {-
+      Help
+    -}
     ["help"] ->
       pure $
         unlines
@@ -77,12 +111,14 @@ performCommand' command = do
             "  find_tools [search]               - List all tools or search for tools",
             "  delete_tool <toolId>              - Delete a tool with the given tool ID",
             "",
+            "Rentals:",
+            "  rent <userId> <toolId>            - Rent a tool by a user",
+            "  return <rentalId>                 - Return a rented tool",
+            "  all_rentals                       - List all rentals",
+            "  actual_rentals                    - List currently active rentals",
+            "",
             "help                                - Show this help message"
           ]
-    (maybeSearch : _) ->
-      handleResult
-        (Tool.findAll maybeSearch)
-        (pure . concatMap (\v -> show v ++ "\n\n"))
     _ -> pure "Sorry command not found"
 
 basePrompt :: IO ()

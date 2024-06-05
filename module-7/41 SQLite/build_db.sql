@@ -14,11 +14,11 @@ CREATE TABLE tool (
 ); 
 
 CREATE TABLE rental (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, 
   user_id INTEGER,
   tool_id INTEGER,
   checkoutAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   returnAt DATETIME NULL,
-  PRIMARY KEY (user_id, tool_id, returnAt),
   FOREIGN KEY (user_id) REFERENCES user(id),
   FOREIGN KEY (tool_id) REFERENCES tool(id)
 ); 
