@@ -66,9 +66,10 @@ performCommand' command = do
     -}
     ["rent", userId, rentId] ->
       case (readMaybe userId, readMaybe rentId) of
-        (Just userId', Just rentId') -> do
-          let a = userId' + rentId' :: Int
-          pure $ show a
+        (Just userId', Just rentId') ->
+          handleResult
+            (Rental.checkout userId' rentId')
+            (\_ -> pure "Tool rented")
         _ -> pure "Wrong user id ot tool id"
     --
     ["return", rentId] ->
