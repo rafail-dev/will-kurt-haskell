@@ -6,12 +6,12 @@ import Lib (flip3, withConnection)
 import User.Model (User (..))
 
 add :: String -> IO (Either SomeException ())
-add userName' =
+add name' =
   withConnection $
     flip3
       execute
-      "INSERT INTO user (username) VALUES (?);"
-      (Only userName')
+      "INSERT INTO user (name) VALUES (?);"
+      (Only name')
 
 delete :: Int -> IO (Either SomeException ())
 delete userId' =
@@ -26,4 +26,4 @@ findAll search =
   withConnection $
     case search of
       "" -> flip query_ "SELECT * FROM user;"
-      v -> flip3 query "SELECT * FROM user WHERE username like ('%' || ? || '%');" (Only v)
+      v -> flip3 query "SELECT * FROM user WHERE name like ('%' || ? || '%');" (Only v)

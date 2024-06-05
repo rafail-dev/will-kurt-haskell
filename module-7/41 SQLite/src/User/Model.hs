@@ -5,7 +5,7 @@ import Database.SQLite.Simple.FromRow
 
 data User = User
   { userId :: Int,
-    username :: T.Text
+    name :: T.Text
   }
 
 instance Show User where
@@ -13,7 +13,7 @@ instance Show User where
     mconcat
       [ show $ userId user,
         ") ",
-        T.unpack $ username user
+        T.unpack $ name user
       ]
 
 instance FromRow User where

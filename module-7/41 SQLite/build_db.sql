@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS user;
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT, 
-  username TEXT NOT NULL
+  name TEXT NOT NULL
 );
 
 CREATE TABLE tool (
@@ -23,12 +23,12 @@ CREATE TABLE rental (
   FOREIGN KEY (tool_id) REFERENCES tool(id)
 ); 
 
-CREATE INDEX idx_user_username ON user (username);
+CREATE INDEX idx_user_name ON user (name);
 CREATE INDEX idx_tool_name ON tool (name);
 CREATE INDEX idx_rental_user_id ON rental (user_id);
 CREATE INDEX idx_rental_tool_id ON rental (tool_id);
 
-INSERT INTO user (username) VALUES 
+INSERT INTO user (name) VALUES 
   ("Will Kurt"),
   ("Anna Smith"),
   ("John Doe");
