@@ -5,7 +5,7 @@
     COALESCE(MAX(r.returnAt), NULL) AS last_returned,
     COUNT(r.tool_id) AS timesBorrowed
 FROM 
-    tools t
+    tool t
 LEFT JOIN 
     rental r ON t.id = r.tool_id
 WHERE 

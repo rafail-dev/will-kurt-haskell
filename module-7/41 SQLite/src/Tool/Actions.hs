@@ -11,7 +11,7 @@ add name' description' =
   withConnection $
     flip3
       execute
-      "INSERT INTO tools (name, description) VALUES (?, ?);"
+      "INSERT INTO tool (name, description) VALUES (?, ?);"
       (name', description')
 
 delete :: Int -> IO (Either SomeException ())
@@ -19,7 +19,7 @@ delete toolId' =
   withConnection $
     flip3
       execute
-      "DELETE FROM tools WHERE id = (?);"
+      "DELETE FROM tool WHERE id = (?);"
       (Only toolId')
 
 findAll :: String -> IO (Either SomeException [Tool])
@@ -30,4 +30,4 @@ findAll search =
       sql
       (dup search)
   where
-    sql = Query $(embedStringFile "src/Tool/find-all.sql")
+    sql = Query $(embedStringFile "src/Tool/find.sql")

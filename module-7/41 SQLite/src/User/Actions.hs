@@ -10,7 +10,7 @@ add userName' =
   withConnection $
     flip3
       execute
-      "INSERT INTO users (username) VALUES (?);"
+      "INSERT INTO user (username) VALUES (?);"
       (Only userName')
 
 delete :: Int -> IO (Either SomeException ())
@@ -18,12 +18,12 @@ delete userId' =
   withConnection $
     flip3
       execute
-      "DELETE FROM users WHERE id = ?;"
+      "DELETE FROM user WHERE id = ?;"
       (Only userId')
 
 findAll :: String -> IO (Either SomeException [User])
 findAll search =
   withConnection $
     case search of
-      "" -> flip query_ "SELECT * FROM users;"
-      v -> flip3 query "SELECT * FROM users WHERE username like ('%' || ? || '%');" (Only v)
+      "" -> flip query_ "SELECT * FROM user;"
+      v -> flip3 query "SELECT * FROM user WHERE username like ('%' || ? || '%');" (Only v)
