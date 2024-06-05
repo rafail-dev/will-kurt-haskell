@@ -11,4 +11,4 @@ LEFT JOIN
 WHERE 
   name like '%' || ? || '%' or description like '%' || ? || '%'
 GROUP BY 
-    t.id, t.name, t.description
+    t.id
