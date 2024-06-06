@@ -139,11 +139,14 @@ processInput :: [String] -> IO ()
 processInput =
   (>> basePrompt) . (>> putStrLn "") . (putStrLn <=< performCommand')
 
+isQuitLine :: String -> Bool
+isQuitLine line = line == "quit" || line == ":q"
+
 main :: IO ()
 main = do
   basePrompt
   input <- getContents
-  let commands = takeWhile (/= "quit") (lines input)
+  let commands = takeWhile (not . isQuitLine) (lines input)
   forM_
     (map words commands)
     processInput
