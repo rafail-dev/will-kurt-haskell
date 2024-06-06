@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 DROP TABLE IF EXISTS rental;
 DROP TABLE IF EXISTS tool;
 DROP TABLE IF EXISTS user;
@@ -19,8 +21,8 @@ CREATE TABLE rental (
   tool_id INTEGER,
   checkoutAt DATETIME DEFAULT CURRENT_TIMESTAMP,
   returnAt DATETIME NULL,
-  FOREIGN KEY (user_id) REFERENCES user(id),
-  FOREIGN KEY (tool_id) REFERENCES tool(id)
+  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (tool_id) REFERENCES tool(id) ON DELETE CASCADE ON UPDATE CASCADE
 ); 
 
 CREATE INDEX idx_user_name ON user (name);

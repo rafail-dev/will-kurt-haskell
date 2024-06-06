@@ -6,7 +6,7 @@ module Lib
 where
 
 import Control.Exception (SomeException, bracket, try)
-import Database.SQLite.Simple (Connection, close, open)
+import Database.SQLite.Simple (Connection, close, execute_, open)
 
 flip3 :: (a -> b -> c -> d) -> (b -> c -> a -> d)
 flip3 f c a b = f b c a
@@ -22,5 +22,6 @@ dup a = (a, a)
 --   close conn
 
 withConnection :: (Connection -> IO a) -> IO (Either SomeException a)
-withConnection action = bracket (open "tools.db") close $ \conn ->
+withConnection action = bracket (open "tools.db") close $ \conn -> do
+  execute_ conn "PRAGMA foreign_keys = ON;"
   try (action conn)
